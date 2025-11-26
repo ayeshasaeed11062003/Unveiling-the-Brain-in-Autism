@@ -139,13 +139,13 @@ This confirms we absolutely need domain-generalization.
 
 # Summary of FYP-1 Findings
 
-### ✔ Data pipeline complete  
-### ✔ Graph construction complete  
-### ✔ Embeddings generated  
-### ✔ t-SNE visualizations successfully produced  
-### ✔ Diagnostic signal is weak  
-### ✔ Site bias dominates the embedding space  
-### ✔ Strong justification for contrastive learning in FYP-2
+### Data pipeline complete  
+### Graph construction complete  
+### Embeddings generated  
+### t-SNE visualizations successfully produced  
+### Diagnostic signal is weak  
+### Site bias dominates the embedding space  
+### Strong justification for contrastive learning in FYP-2
 
 ---
 
@@ -211,9 +211,9 @@ Use two setups:
 ## Phase 3 — New t-SNE Visualizations
 After contrastive learning, expect:
 
-### ✔ Site clusters to dissolve  
-### ✔ ASD vs Control to have more separation  
-### ✔ Overall embedding space more biologically meaningful
+### Site clusters to dissolve  
+### ASD vs Control to have more separation  
+### Overall embedding space more biologically meaningful
 
 These visualizations will complete your FYP-2 report.
 
