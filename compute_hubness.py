@@ -1,50 +1,36 @@
 import numpy as np
-import pandas as pd
-import tqdm
-import seaborn as sns
-import matplotlib.pyplot as plt
-from scipy.stats import ttest_ind
+import networkx as nx
+from utils_graph import matrix_to_graph, compute_hubness  # Make sure these exist in utils_graph.py
 
-from load_data import load_data
-from utils_graph import matrix_to_graph, compute_hubness
+# -----------------------------
+# Load adjacency matrices
+# -----------------------------
+matrices_file = "C:/Users/ayesh/OneDrive/Desktop/Unveiling-the-Brain-in-Autism/padded_matrices_200.npy" 
+matrices = np.load(matrices_file)
+print(f"[INFO] Loaded {len(matrices)} matrices.")
 
-PRINT_EDGES = False
-
-matrices, labels, pheno = load_data()
-
+# -----------------------------
+# Compute hubness for each graph
+# -----------------------------
 hubness_list = []
 
-print("🔍 Computing hubness for all 871 subjects...\n")
+for i, matrix in enumerate(matrices):
+    # Convert matrix to graph
+    G = matrix_to_graph(matrix, threshold=0.3)
+    
+    # Compute hubness
+    hub_scores = compute_hubness(G)
+    
+    hubness_list.append(hub_scores)
 
-for i in tqdm.tqdm(range(len(matrices))):
-    mat = matrices[i]
+print(f"[INFO] Computed hubness for {len(hubness_list)} graphs.")
 
-    # convert to graph
-    G = matrix_to_graph(mat, threshold=0.3)
-    hub_score = compute_hubness(G)
+# -----------------------------
+# Save hubness results
+# -----------------------------
+np.save("hubness_scores.npy", hubness_list)
+print("[INFO] Hubness scores saved as 'hubness_scores.npy'.")
 
-    hubness_list.append({
-        "Subject": i,
-        "Hubness": hub_score,
-        "Label": labels[i],
-        "Group": "ASD" if labels[i] == 1 else "Control"
-    })
-
-hubness_df = pd.DataFrame(hubness_list)
-hubness_df.to_csv("C:\\Users\\ayesh\\OneDrive\\Desktop\\Unveiling-the-Brain-in-Autism\\hubness_results.csv", index=False)
-
-print("Saved to hubness_results.csv")
-print(hubness_df.head())
-
-# ----- Visualization -----
-plt.figure(figsize=(8,5))
-sns.boxplot(data=hubness_df, x="Group", y="Hubness", palette="coolwarm")
-plt.title("Hubness Comparison: ASD vs Control")
-plt.show()
-
-# ----- Statistical Test -----
-asd = hubness_df[hubness_df["Group"]=="ASD"]["Hubness"]
-ctrl = hubness_df[hubness_df["Group"]=="Control"]["Hubness"]
-
-t,p = ttest_ind(asd,ctrl, equal_var=False)
-print(f"T-test: t={t:.3f}, p={p:.4f}")
+# Optional: inspect first graph hubness
+print("[INFO] Example hubness scores for first graph:")
+print(hubness_list[0])

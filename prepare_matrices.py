@@ -43,3 +43,4 @@ matrices = np.array(matrices)
 np.save("C:\\Users\\ayesh\\OneDrive\\Desktop\\Unveiling-the-Brain-in-Autism\\padded_matrices_200", matrices)
 
 print("DONE! Saved:", matrices.shape)
+print("Saved to:", os.path.abspath("padded_matrices_200.npy"))
