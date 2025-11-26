@@ -46,7 +46,7 @@ A custom ID extractor was written to:
 - Extract numeric subject IDs
 - Match to phenotype rows
 
-✔ Matched **871 / 871** files → perfect alignment.
+Matched **871 / 871** files → perfect alignment.
 
 ---
 
@@ -56,8 +56,8 @@ Loaded phenotype CSV:
 - Converted all `SUB_ID` to strings
 - Intersected with extracted file IDs
 
-✔ Found **871 valid subjects**  
-✔ **All 871 subjects** have a valid `DX_GROUP` (diagnosis)
+Found **871 valid subjects**  
+**All 871 subjects** have a valid `DX_GROUP` (diagnosis)
 
 ---
 
@@ -67,7 +67,7 @@ Each 200×200 matrix is thresholded:
 - Converted to undirected NetworkX graph  
 - Removed self-loops  
 
-✔ Built **871 graphs**
+Built **871 graphs**
 
 ---
 
