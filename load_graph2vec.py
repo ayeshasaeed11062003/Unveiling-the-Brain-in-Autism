@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import os
 
-EMB_PATH = "graph2vec_embeddings.npy"
+EMB_PATH = "graph_embeddings.npy"
 if not os.path.exists(EMB_PATH):
     raise FileNotFoundError(EMB_PATH)
 
